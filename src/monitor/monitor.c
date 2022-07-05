@@ -1,7 +1,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include "philo_struct.h"
-#include "philo_fork.h"
+#include "philo_create_variables.h"
 #include "philo_philosopher.h"
 #include "philo_monitor.h"
 #define DIE_MSG "is died"
@@ -35,7 +35,7 @@ void	monitor(void *arg)
 
 	table = (t_diningtable*)arg;
 	i = 0;
-	upper_array = table->philo[0]->philo_num;
+	upper_array = table->philo_num;
 	while(1)
 	{
 		continue_flg = STOP;

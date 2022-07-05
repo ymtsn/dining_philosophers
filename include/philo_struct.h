@@ -4,7 +4,6 @@
 typedef struct s_philo{
 	pthread_t		thread_id;
 	int				philo_id;
-	int				philo_num;
 	int				die;
 	int				eat;
 	int				sleep;
@@ -14,7 +13,6 @@ typedef struct s_philo{
 }t_philo;
 typedef struct s_fork{
 	int				fork_id;
-	int				fork_num;
 	int				use_philo_num;
 	pthread_mutex_t	mutex;
 } t_fork;
@@ -22,5 +20,6 @@ typedef struct s_diningtable{
 	t_philo **philo;
 	t_fork	**fork;
 	int		target_philo_id;
+	int		philo_num;
 } t_diningtable;
 #endif

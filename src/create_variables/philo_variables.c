@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "philo_struct.h"
-#include "philo_fork.h"
-#include "philo_philosopher.h"
+#include "philo_create_variables.h"
 #define PHILO_NUM_INDEX 1
 #define DIE_TIME_INDEX 2
 #define EAT_TIME_INDEX 3
@@ -20,7 +19,6 @@ static void	init_philo_variable(int philo_num, char *argv[], t_philo **philo)
 		philo[i] = malloc(sizeof(t_philo));
 		philo[i]->philo_id = i;
 		philo[i]->thread_id = (pthread_t)-1;
-		philo[i]->philo_num = philo_num;
 		philo[i]->die = atoi(argv[DIE_TIME_INDEX]);
 		philo[i]->eat = atoi(argv[EAT_TIME_INDEX]);
 		philo[i]->sleep = atoi(argv[SLEEP_TIME_INDEX]);
@@ -30,12 +28,10 @@ static void	init_philo_variable(int philo_num, char *argv[], t_philo **philo)
 	}
 }
 
-t_philo **create_philo_variable(char *argv[])
+t_philo	**create_philo_variables(char *argv[], int philo_num)
 {
-	int		philo_num;
 	t_philo **philo;
 
-	philo_num = atoi(argv[PHILO_NUM_INDEX]);
 	philo = malloc(sizeof(t_philo*)*philo_num);
 	init_philo_variable(philo_num, argv, philo);
 	return (philo);

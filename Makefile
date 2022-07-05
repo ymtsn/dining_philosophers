@@ -14,16 +14,16 @@ MAIN_OBJ			=	$(MAIN_SRC:.c=.o)
 MAIN_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MAIN_OBJ)
 
 PHILO_DIR			=	$(SRC_DIR)/philosopher
-PHILO_SRC			=	philosopher_pthread.c philosopher_behavior.c philosopher_variable.c
+PHILO_SRC			=	philo_pthread.c philo_behavior.c
 PHILO_SRC_FULLNAME	=	$(addprefix ./src/philosopher/, $(PHILO_SRC))
 PHILO_OBJ			=	$(PHILO_SRC:.c=.o)
 PHILO_OBJ_FULLNAME	=	$(addprefix ./obj/, $(PHILO_OBJ))
 
-FORK_DIR			=	$(SRC_DIR)/fork
-FORK_SRC			=	fork.c
-FORK_SRC_FULLNAME	=	$(FORK_DIR)/$(FORK_SRC)
-FORK_OBJ			=	$(FORK_SRC:.c=.o)
-FORK_OBJ_FULLNAME	=	$(OBJ_DIR)/$(FORK_OBJ)
+CREATE_VARIABLES_DIR			=	$(SRC_DIR)/create_variables
+CREATE_VARIABLES_SRC			=	create_variables.c fork_variables.c philo_variables.c
+CREATE_VARIABLES_SRC_FULLNAME	=	$(addprefix ./src/create_variables/, $(CREATE_VARIABLES_SRC))
+CREATE_VARIABLES_OBJ			=	$(CREATE_VARIABLES_SRC:.c=.o)
+CREATE_VARIABLES_OBJ_FULLNAME	=	$(addprefix ./obj/, $(CREATE_VARIABLES_OBJ))
 
 MONITOR_DIR				=	$(SRC_DIR)/monitor
 MONITOR_SRC				=	monitor.c
@@ -38,6 +38,7 @@ DEBUG_OBJ			=	$(DEBUG_SRC:.c=.o)
 DEBUG_OBJ_FULLNAME	=	$(OBJ_DIR)/$(DEBUG_OBJ)
 
 OBJ_LIST			=	$(MAIN_OBJ_FULLNAME) \
+						$(CREATE_VARIABLES_OBJ_FULLNAME) \
 						$(PHILO_OBJ_FULLNAME) \
 						$(FORK_OBJ_FULLNAME) \
 						$(MONITOR_OBJ_FULLNAME) \
@@ -51,11 +52,11 @@ $(OBJ_DIR)/%.o:$(MAIN_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(COMPILE_FLAGS) -c $^ -o $@
 
-$(OBJ_DIR)/%.o:$(PHILO_DIR)/%.c
+$(OBJ_DIR)/%.o:$(CREATE_VARIABLES_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(COMPILE_FLAGS) -c $^ -o $@
 
-$(OBJ_DIR)/%.o:$(FORK_DIR)/%.c
+$(OBJ_DIR)/%.o:$(PHILO_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(COMPILE_FLAGS) -c $^ -o $@
 

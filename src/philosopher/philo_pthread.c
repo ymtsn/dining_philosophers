@@ -2,21 +2,23 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "philo_struct.h"
-#include "philo_fork.h"
+#include "philo_create_variables.h"
 #include "philo_philosopher.h"
 
 void	philosopher(void *arg)
 {
 	t_diningtable	*table;
 	int				i;
+	int				philo_num;
 
 	table = (t_diningtable*)arg;
 	i = table->target_philo_id;
+	philo_num = table->philo_num;
 	table->philo[i]->timestamp = get_timestamp();
-	take_fork(table->philo[i], table->fork);
+	take_fork(table->philo[i], table->fork, philo_num);
 	eat(table->philo[i]);
 	table->philo[i]->timestamp = get_timestamp();
-	philo_sleep(table->philo[i], table->fork);
+	philo_sleep(table->philo[i], table->fork, philo_num);
 	think(table->philo[i]);
 }
 
@@ -27,7 +29,7 @@ void	create_philo_pthread(t_diningtable *table)
 	t_philo **philo;
 
 	philo = table->philo;
-	philo_num = philo[0]->philo_num;
+	philo_num = table->philo_num;
 	i = 0;
 	while (i < philo_num)
 	{

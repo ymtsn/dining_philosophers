@@ -1,7 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include "philo_struct.h"
-#include "philo_fork.h"
+#include "philo_create_variables.h"
 #include "philo_philosopher.h"
 #include "philo_debug.h"
 
@@ -13,16 +13,19 @@ void	print_argv(char *argv[])
 	printf("time_to_sleep:%s\n", argv[4]);
 }
 
-void	print_philo(t_philo **philo)
+void	print_philo(t_diningtable *table)
 {
-	int i;
+	int		i;
+	int		philo_num;
+	t_philo	**philo;
 
 	i = 0;
-	while (i < philo[0]->philo_num)
+	philo_num = table->philo_num;
+	philo = table->philo;
+	while (i < philo_num)
 	{
 		printf("philo_id:%d\n", philo[i]->philo_id);
 		printf("thread_id:%d\n", (int)(philo[i]->thread_id));
-		printf("philo_num:%d\n", philo[i]->philo_num);
 		printf("die:%d\n", philo[i]->die);
 		printf("eat:%d\n", philo[i]->eat);
 		printf("sleep:%d\n", philo[i]->sleep);
@@ -30,16 +33,18 @@ void	print_philo(t_philo **philo)
 	}
 }
 
-void	print_fork(t_fork **fork)
+void	print_fork(t_diningtable *table)
 {
-	int i;
+	int		i;
+	int		philo_num;
+	t_fork	**fork;
 
 	i = 0;
-	while (i < fork[0]->fork_num)
+	philo_num = table->philo_num;
+	fork = table->fork;
+	while (i < philo_num)
 	{
 		printf("fork_id:%d\n", fork[i]->fork_id);
-		printf("fork_num:%d\n", fork[i]->fork_num);
-		printf("use_philo_num:%d\n", fork[i]->use_philo_num);
 		i++;
 	}
 }
