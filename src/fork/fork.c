@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include "philo_struct.h"
 #include "philo_fork.h"
 #define FORK_NUM_INDEX 1
 

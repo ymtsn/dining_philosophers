@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include "philo_struct.h"
 #include "philo_fork.h"
 #include "philo_philosopher.h"
 #define PHILO_NUM_INDEX 1
@@ -23,6 +24,7 @@ static void	init_philo_variable(int philo_num, char *argv[], t_philo **philo)
 		philo[i]->die = atoi(argv[DIE_TIME_INDEX]);
 		philo[i]->eat = atoi(argv[EAT_TIME_INDEX]);
 		philo[i]->sleep = atoi(argv[SLEEP_TIME_INDEX]);
+		philo[i]->timestamp = 0;
 		/* philo[i]->must_eat = atoi(argv[MUST_EAT_INDEX]); */
 		i++;
 	}

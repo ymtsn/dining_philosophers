@@ -25,6 +25,12 @@ FORK_SRC_FULLNAME	=	$(FORK_DIR)/$(FORK_SRC)
 FORK_OBJ			=	$(FORK_SRC:.c=.o)
 FORK_OBJ_FULLNAME	=	$(OBJ_DIR)/$(FORK_OBJ)
 
+MONITOR_DIR				=	$(SRC_DIR)/monitor
+MONITOR_SRC				=	monitor.c
+MONITOR_SRC_FULLNAME	=	$(MONITOR_DIR)/$(MONITOR_SRC)
+MONITOR_OBJ				=	$(MONITOR_SRC:.c=.o)
+MONITOR_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MONITOR_OBJ)
+
 DEBUG_DIR			=	$(SRC_DIR)/debug
 DEBUG_SRC			=	debug.c
 DEBUG_SRC_FULLNAME	=	$(DEBUG_DIR)/$(DEBUG_SRC)
@@ -34,6 +40,7 @@ DEBUG_OBJ_FULLNAME	=	$(OBJ_DIR)/$(DEBUG_OBJ)
 OBJ_LIST			=	$(MAIN_OBJ_FULLNAME) \
 						$(PHILO_OBJ_FULLNAME) \
 						$(FORK_OBJ_FULLNAME) \
+						$(MONITOR_OBJ_FULLNAME) \
 						$(DEBUG_OBJ_FULLNAME)
 
 all		:	$(NAME)
@@ -49,6 +56,10 @@ $(OBJ_DIR)/%.o:$(PHILO_DIR)/%.c
 	$(CC) $(COMPILE_FLAGS) -c $^ -o $@
 
 $(OBJ_DIR)/%.o:$(FORK_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(COMPILE_FLAGS) -c $^ -o $@
+
+$(OBJ_DIR)/%.o:$(MONITOR_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(COMPILE_FLAGS) -c $^ -o $@
 

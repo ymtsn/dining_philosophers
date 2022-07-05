@@ -1,5 +1,6 @@
 #include <pthread.h>
 #include <stdio.h>
+#include "philo_struct.h"
 #include "philo_fork.h"
 #include "philo_philosopher.h"
 #include "philo_debug.h"
