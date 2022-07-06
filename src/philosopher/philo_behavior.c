@@ -6,12 +6,6 @@
 #include "philo_struct.h"
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
-#define NG	0
-#define OK	1
-#define FORK_MSG "has taken a fork"
-#define EAT_MSG "is eating"
-#define SLEEP_MSG "is sleeping"
-#define THINK_MSG "is thinking"
 
 unsigned long get_timestamp(void)
 {

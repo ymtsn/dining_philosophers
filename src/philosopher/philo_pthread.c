@@ -35,7 +35,20 @@ void	create_philo_pthread(t_diningtable *table)
 	{
 		table->target_philo_id = i;
 		(void)pthread_create(&philo[i]->thread_id, NULL, (void *)philosopher, table);
-		(void)pthread_join(philo[i]->thread_id, NULL);
+		i++;
+	}
+}
+
+void	join_philo_pthread(t_diningtable *table)
+{
+	int	philo_num;
+	int	i;
+
+	philo_num = table->philo_num;
+	i = 0;
+	while (i < philo_num)
+	{
+		(void)pthread_join(table->philo[i]->thread_id, NULL);
 		i++;
 	}
 }
