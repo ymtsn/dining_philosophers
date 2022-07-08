@@ -1,25 +1,19 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <unistd.h>
 #include "philo_struct.h"
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 
 void	philosopher(void *arg)
 {
-	t_diningtable	*table;
-	int				i;
-	int				philo_num;
+	t_philo			*philo;
 
-	table = (t_diningtable*)arg;
-	i = table->target_philo_id;
-	philo_num = table->philo_num;
-	table->philo[i]->timestamp = get_timestamp();
-	take_fork(table->philo[i], table->fork, philo_num);
-	eat(table->philo[i]);
-	table->philo[i]->timestamp = get_timestamp();
-	philo_sleep(table->philo[i], table->fork, philo_num);
-	think(table->philo[i]);
+	philo = (t_philo*)arg;
+	eat(philo);
+	philo_sleep(philo);
+	think(philo);
 }
 
 void	create_philo_pthread(t_diningtable *table)
@@ -33,8 +27,7 @@ void	create_philo_pthread(t_diningtable *table)
 	i = 0;
 	while (i < philo_num)
 	{
-		table->target_philo_id = i;
-		(void)pthread_create(&philo[i]->thread_id, NULL, (void *)philosopher, table);
+		(void)pthread_create(&philo[i]->thread_id, NULL, (void *)philosopher, table->philo[i]);
 		i++;
 	}
 }

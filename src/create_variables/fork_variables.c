@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "philo_struct.h"
 #include "philo_create_variables.h"
+#include "philo_philosopher.h"
 #define FORK_NUM_INDEX 1
 #define SUCCESS 0
 #define FAILURE 1
@@ -21,7 +22,7 @@ static int init_fork_variables(int philo_num, t_fork **fork)
 			return (FAILURE);
 		}
 		fork[i]->fork_id = i;
-		fork[i]->use_philo_num = NO_USE;
+		fork[i]->use = NO_USE;
 		pthread_mutex_init(&fork[i]->mutex, NULL);
 		i++;
 	}

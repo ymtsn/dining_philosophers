@@ -1,6 +1,10 @@
 #ifndef PHILO_STRUCT_H
 #define PHILO_STRUCT_H
-#define PHILO_DIED 1
+typedef struct s_fork{
+	int				fork_id;
+	int				use;
+	pthread_mutex_t	mutex;
+} t_fork;
 typedef struct s_philo{
 	pthread_t		thread_id;
 	int				philo_id;
@@ -8,18 +12,16 @@ typedef struct s_philo{
 	int				eat;
 	int				sleep;
 	int				state;
-	unsigned long	timestamp;
+	size_t			timestamp;
 	size_t			must_eat;
-}t_philo;
-typedef struct s_fork{
-	int				fork_id;
-	int				use_philo_num;
+	t_fork			*right_fork;
+	t_fork			*left_fork;
 	pthread_mutex_t	mutex;
-} t_fork;
+}t_philo;
 typedef struct s_diningtable{
 	t_philo **philo;
 	t_fork	**fork;
-	int		target_philo_id;
 	int		philo_num;
+	pthread_t	monitor_tid;
 } t_diningtable;
 #endif

@@ -7,45 +7,52 @@
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 
-unsigned long get_timestamp(void)
+size_t get_timestamp(void)
 {
 	struct timeval	tv;
 
-	(void)gettimeofday(&tv, NULL);
+	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	print_timestamp(t_philo *philo, char *MSG)
+static void	print_timestamp(t_philo *philo, char *MSG)
 {
-	unsigned long	timestamp;
-
-	timestamp = get_timestamp();
-	printf("%lu %d %s\n", timestamp, philo->philo_id + 1, MSG);
-}
-
-void	take_fork(t_philo *philo, t_fork **fork, int philo_num)
-{
-	pthread_mutex_lock(&fork[philo->philo_id]->mutex);
-	print_timestamp(philo, FORK_MSG);
-	pthread_mutex_lock(&fork[(philo->philo_id + 1) % philo_num]->mutex);
-	print_timestamp(philo, FORK_MSG);
+	if (philo->state == PHILO_DIED)
+		return ;
+	printf("%lu %d %s\n", get_timestamp(), philo->philo_id + 1, MSG);
 }
 
 void	eat(t_philo *philo)
 {
+	pthread_mutex_lock(&(philo->mutex));
+	philo->state = PHILO_EAT;
+	pthread_mutex_unlock(&(philo->mutex));
+	philo->timestamp = get_timestamp();
+	waitor(philo);
+	take_right_fork(philo);
+	print_timestamp(philo, FORK_MSG);
+	take_left_fork(philo);
+	print_timestamp(philo, FORK_MSG);
 	print_timestamp(philo, EAT_MSG);
 	usleep(philo->eat * 1000);
+	philo->timestamp = get_timestamp();
 }
 
-void	philo_sleep(t_philo *philo, t_fork **fork, int philo_num)
+void	philo_sleep(t_philo *philo)
 {
-	pthread_mutex_unlock(&fork[philo->philo_id]->mutex);
-	pthread_mutex_unlock(&fork[(philo->philo_id + 1) % philo_num]->mutex);
+	pthread_mutex_lock(&(philo->mutex));
+	philo->state = PHILO_SLEEP;
+	pthread_mutex_unlock(&(philo->mutex));
+	put_right_fork(philo);
+	put_left_fork(philo);
 	print_timestamp(philo, SLEEP_MSG);
 	usleep(philo->sleep * 1000);
 }
 
 void	think(t_philo *philo)
 {
+	pthread_mutex_lock(&(philo->mutex));
+	philo->state = PHILO_THINK;
+	pthread_mutex_unlock(&(philo->mutex));
 	print_timestamp(philo, THINK_MSG);
 }

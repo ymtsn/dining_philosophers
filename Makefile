@@ -14,7 +14,7 @@ MAIN_OBJ			=	$(MAIN_SRC:.c=.o)
 MAIN_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MAIN_OBJ)
 
 PHILO_DIR			=	$(SRC_DIR)/philosopher
-PHILO_SRC			=	philo_pthread.c philo_behavior.c
+PHILO_SRC			=	philo_behavior.c philo_fork.c philo_pthread.c philo_waitor.c
 PHILO_SRC_FULLNAME	=	$(addprefix ./src/philosopher/, $(PHILO_SRC))
 PHILO_OBJ			=	$(PHILO_SRC:.c=.o)
 PHILO_OBJ_FULLNAME	=	$(addprefix ./obj/, $(PHILO_OBJ))
