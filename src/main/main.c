@@ -17,10 +17,8 @@ int	main(int argc,	char *argv[])
 		return (1);
 	create_philo_pthread(table);
 	create_monitor_pthread(table);
-	/* join_philo_pthread(table); */
 	join_monitor_pthread(table);
 	destroy_variables(table);
-/* 	destroy_variables(table); */
 /* 	print_philo(table);
 	print_fork(table); */
 	return (0);

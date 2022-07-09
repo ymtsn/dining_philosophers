@@ -12,44 +12,40 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-static int	init_philo_variables(int philo_num, char *argv[], t_waitor *waitor, t_philo **philo, t_fork **fork)
+static int	init_philo_variables(t_diningtable *table)
 {
 	int	i;
 
 	i = 0;
-	while(i < philo_num)
+	while(i < table->philo_num)
 	{
-		philo[i] = malloc(sizeof(t_philo));
-		if (philo[i] == NULL)
+		table->philo[i] = malloc(sizeof(t_philo));
+		if (table->philo[i] == NULL)
 		{
-			free_array(i, FREE_PHILO, philo);
+			free_array(i, FREE_PHILO, table->philo);
 			return (FAILURE);
 		}
-		philo[i]->philo_id = i;
-		philo[i]->thread_id = (pthread_t)-1;
-		philo[i]->die = atoi(argv[DIE_TIME_INDEX]);
-		philo[i]->eat = atoi(argv[EAT_TIME_INDEX]);
-		philo[i]->sleep = atoi(argv[SLEEP_TIME_INDEX]);
-		philo[i]->timestamp = 0;
-		philo[i]->state = PHILO_INIT;
-		pthread_mutex_init(&philo[i]->mutex, NULL);
-		philo[i]->waitor = waitor;
-		philo[i]->right_fork = fork[i];
-		philo[i]->left_fork = fork[(i + 1) % philo_num];
-		/* philo[i]->must_eat = atoi(argv[MUST_EAT_INDEX]); */
+		table->philo[i]->philo_id = i;
+		table->philo[i]->thread_id = (pthread_t)-1;
+		table->philo[i]->table = (void *)table;
+		table->philo[i]->timestamp = 0;
+		table->philo[i]->state = PHILO_INIT;
+		pthread_mutex_init(&table->philo[i]->mutex, NULL);
+		table->philo[i]->waitor = table->waitor;
+		table->philo[i]->right_fork = table->fork[i];
+		table->philo[i]->left_fork = table->fork[(i + 1) % table->philo_num];
 		i++;
 	}
 	return (SUCCESS);
 }
 
-t_philo	**create_philo_variables(char *argv[], int philo_num, t_waitor *waitor, t_fork **fork)
+t_philo	**create_philo_variables(t_diningtable *table)
 {
-	t_philo **philo;
 
-	philo = malloc(sizeof(t_philo*)*philo_num);
-	if (philo == NULL)
+	table->philo = malloc(sizeof(t_philo*)*table->philo_num);
+	if (table->philo == NULL)
 		return (NULL);
-	if (init_philo_variables(philo_num, argv, waitor, philo, fork) == FAILURE)
+	if (init_philo_variables(table) == FAILURE)
 		return (NULL);
-	return (philo);
+	return (table->philo);
 }

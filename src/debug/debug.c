@@ -26,9 +26,9 @@ void	print_philo(t_diningtable *table)
 	{
 		printf("philo_id:%d\n", philo[i]->philo_id);
 		printf("thread_id:%d\n", (int)(philo[i]->thread_id));
-		printf("die:%d\n", philo[i]->die);
-		printf("eat:%d\n", philo[i]->eat);
-		printf("sleep:%d\n", philo[i]->sleep);
+		printf("die:%d\n", ((t_diningtable*)philo[i]->table)->die);
+		printf("eat:%d\n", ((t_diningtable*)philo[i]->table)->eat);
+		printf("sleep:%d\n", ((t_diningtable*)philo[i]->table)->sleep);
 		i++;
 	}
 }

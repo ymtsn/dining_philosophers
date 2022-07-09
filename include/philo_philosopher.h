@@ -13,7 +13,7 @@
 #define NO_USE -1
 void			create_philo_pthread(t_diningtable *);
 void			join_philo_pthread(t_diningtable *);
-size_t	get_timestamp(void);
+size_t			get_timestamp(void);
 void			eat(t_philo *);
 void			philo_sleep(t_philo *);
 void			think(t_philo *);
