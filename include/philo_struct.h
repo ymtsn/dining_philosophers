@@ -5,6 +5,10 @@ typedef struct s_fork{
 	int				use;
 	pthread_mutex_t	mutex;
 } t_fork;
+typedef struct s_waitor{
+	pthread_mutex_t	mutex;
+	int				philo_num;
+}t_waitor;
 typedef struct s_philo{
 	pthread_t		thread_id;
 	int				philo_id;
@@ -14,6 +18,7 @@ typedef struct s_philo{
 	int				state;
 	size_t			timestamp;
 	size_t			must_eat;
+	t_waitor		*waitor;
 	t_fork			*right_fork;
 	t_fork			*left_fork;
 	pthread_mutex_t	mutex;
@@ -21,6 +26,7 @@ typedef struct s_philo{
 typedef struct s_diningtable{
 	t_philo **philo;
 	t_fork	**fork;
+	t_waitor *waitor;
 	int		philo_num;
 	pthread_t	monitor_tid;
 } t_diningtable;

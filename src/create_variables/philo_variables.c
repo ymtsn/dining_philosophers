@@ -12,7 +12,7 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-static int	init_philo_variables(int philo_num, char *argv[], t_philo **philo, t_fork **fork)
+static int	init_philo_variables(int philo_num, char *argv[], t_waitor *waitor, t_philo **philo, t_fork **fork)
 {
 	int	i;
 
@@ -33,6 +33,7 @@ static int	init_philo_variables(int philo_num, char *argv[], t_philo **philo, t_
 		philo[i]->timestamp = 0;
 		philo[i]->state = PHILO_INIT;
 		pthread_mutex_init(&philo[i]->mutex, NULL);
+		philo[i]->waitor = waitor;
 		philo[i]->right_fork = fork[i];
 		philo[i]->left_fork = fork[(i + 1) % philo_num];
 		/* philo[i]->must_eat = atoi(argv[MUST_EAT_INDEX]); */
@@ -41,14 +42,14 @@ static int	init_philo_variables(int philo_num, char *argv[], t_philo **philo, t_
 	return (SUCCESS);
 }
 
-t_philo	**create_philo_variables(char *argv[], int philo_num, t_fork **fork)
+t_philo	**create_philo_variables(char *argv[], int philo_num, t_waitor *waitor, t_fork **fork)
 {
 	t_philo **philo;
 
 	philo = malloc(sizeof(t_philo*)*philo_num);
 	if (philo == NULL)
 		return (NULL);
-	if (init_philo_variables(philo_num, argv, philo, fork) == FAILURE)
+	if (init_philo_variables(philo_num, argv, waitor, philo, fork) == FAILURE)
 		return (NULL);
 	return (philo);
 }

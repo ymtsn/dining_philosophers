@@ -13,6 +13,7 @@ void	take_right_fork(t_philo *philo)
 		return ;
 	pthread_mutex_lock(&(philo->right_fork->mutex));
 	philo->right_fork->use = philo->philo_id;
+
 }
 
 void	take_left_fork(t_philo *philo)

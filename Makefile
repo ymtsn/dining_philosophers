@@ -20,7 +20,7 @@ PHILO_OBJ			=	$(PHILO_SRC:.c=.o)
 PHILO_OBJ_FULLNAME	=	$(addprefix ./obj/, $(PHILO_OBJ))
 
 CREATE_VARIABLES_DIR			=	$(SRC_DIR)/create_variables
-CREATE_VARIABLES_SRC			=	create_variables.c fork_variables.c free_variables.c philo_variables.c
+CREATE_VARIABLES_SRC			=	create_variables.c fork_variables.c free_variables.c philo_variables.c waitor_variable.c
 CREATE_VARIABLES_SRC_FULLNAME	=	$(addprefix ./src/create_variables/, $(CREATE_VARIABLES_SRC))
 CREATE_VARIABLES_OBJ			=	$(CREATE_VARIABLES_SRC:.c=.o)
 CREATE_VARIABLES_OBJ_FULLNAME	=	$(addprefix ./obj/, $(CREATE_VARIABLES_OBJ))

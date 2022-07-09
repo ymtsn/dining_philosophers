@@ -10,8 +10,7 @@
 #define PHILO_SLEEP 1
 #define PHILO_THINK 2
 #define PHILO_DIED 3
-#define NO_USE 0
-#define IN_USE 1
+#define NO_USE -1
 void			create_philo_pthread(t_diningtable *);
 void			join_philo_pthread(t_diningtable *);
 size_t	get_timestamp(void);
@@ -23,6 +22,6 @@ void			take_left_fork(t_philo *);
 void			put_right_fork(t_philo *);
 void			put_left_fork(t_philo *);
 void			philosopher(void *);
-void			waitor(t_philo *);
+int				waitor(t_philo *);
 void			destroy_variables(t_diningtable *);
 #endif

@@ -7,9 +7,12 @@
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 
-void	waitor(t_philo *philo)
+int	waitor(t_philo *philo)
 {
-	while (philo->right_fork->use != NO_USE || philo->left_fork->use != NO_USE)
-		usleep(5);
+	pthread_mutex_lock(&philo->waitor->mutex);
+	if (philo->right_fork->use == NO_USE && philo->left_fork->use == NO_USE)
+		return (0);
+	pthread_mutex_unlock(&philo->waitor->mutex);
+	return (1);
 }
 

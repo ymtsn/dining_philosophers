@@ -13,6 +13,8 @@ int	main(int argc,	char *argv[])
 
 	(void)argc;
 	table = create_variables(argc, argv);
+	if (table == NULL)
+		return (1);
 	create_philo_pthread(table);
 	create_monitor_pthread(table);
 	/* join_philo_pthread(table); */

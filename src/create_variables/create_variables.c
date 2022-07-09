@@ -15,13 +15,20 @@ t_diningtable	*create_variables(int argc, char *argv[])
 	if (table == NULL)
 		return (NULL);
 	table->philo_num = atoi(argv[PHILO_NUM_INDEX]);
+	table->waitor = create_waitor_variable();
+	if (table->waitor == NULL)
+	{
+		free(table);
+		return (NULL);
+	}
+	table->waitor->philo_num = table->philo_num;
 	table->fork = create_fork_variables(table->philo_num);
 	if (table->fork == NULL)
 	{
 		free(table);
 		return (NULL);
 	}
-	table->philo = create_philo_variables(argv, table->philo_num, table->fork);
+	table->philo = create_philo_variables(argv, table->philo_num, table->waitor, table->fork);
 	if (table->philo == NULL)
 	{
 		free_array(table->philo_num, FREE_FORK, table->fork);
