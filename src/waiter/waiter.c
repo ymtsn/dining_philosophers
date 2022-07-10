@@ -31,7 +31,7 @@ void	do_waiter(void *arg)
 						table->philo[i]->left_fork->use = table->philo[i]->philo_id;
 						table->philo[i]->parmission = CAN_EAT;
 					}
-			if (table->philo[i]->state != PHILO_DIED)
+			if (table->philo[i]->stop_flg == 0)
 				continue_flg = CONTINUE;
 			i++;
 		}
@@ -41,12 +41,16 @@ void	do_waiter(void *arg)
 	}
 }
 
-void	create_waiter_pthread(t_diningtable *table)
+int	create_waiter_pthread(t_diningtable *table)
 {
-	(void)pthread_create(&table->waiter_tid, NULL, (void *)do_waiter, table);
+	if (pthread_create(&table->waiter_tid, NULL, (void *)do_waiter, table) != 0)
+		return (FAIL);
+	return (SUCCESS);
 }
 
-void	join_waiter_pthread(t_diningtable *table)
+int	join_waiter_pthread(t_diningtable *table)
 {
-	(void)pthread_join(table->waiter_tid, NULL);
+	if (pthread_join(table->waiter_tid, NULL) != 0)
+		return (FAIL);
+	return (SUCCESS);
 }

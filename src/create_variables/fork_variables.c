@@ -5,8 +5,6 @@
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 #define FORK_NUM_INDEX 1
-#define SUCCESS 0
-#define FAILURE 1
 
 static int init_fork_variables(int philo_num, t_fork **fork)
 {
@@ -19,7 +17,7 @@ static int init_fork_variables(int philo_num, t_fork **fork)
 		if (fork[i] == NULL)
 		{
 			free_array(i, FREE_FORK, fork);
-			return (FAILURE);
+			return (FAIL);
 		}
 		fork[i]->fork_id = i;
 		fork[i]->use = NO_USE;
@@ -36,7 +34,7 @@ t_fork **create_fork_variables(int philo_num)
 	fork = malloc(sizeof(t_fork*)*philo_num);
 	if (fork == NULL)
 		return (NULL);
-	if (init_fork_variables(philo_num, fork) == FAILURE)
+	if (init_fork_variables(philo_num, fork) == FAIL)
 		return (NULL);
 	return (fork);
 }

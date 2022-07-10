@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "philo_struct.h"
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
@@ -11,12 +12,25 @@ void	philosopher(void *arg)
 	t_philo			*philo;
 
 	philo = (t_philo*)arg;
-	eat(philo);
-	philo_sleep(philo);
-	think(philo);
+	while (philo->must_eat--)
+	{
+		eat(philo);
+		if (philo->stop_flg == ERR)
+		{
+			printf("err philosopher thread\n");
+			return ;
+		}
+		philo_sleep(philo);
+		if (philo->stop_flg == ERR)
+		{
+			printf("err philosopher thread\n");
+			return ;
+		}
+		think(philo);
+	}
 }
 
-void	create_philo_pthread(t_diningtable *table)
+int	create_philo_pthread(t_diningtable *table)
 {
 	int	philo_num;
 	int	i;
@@ -27,12 +41,14 @@ void	create_philo_pthread(t_diningtable *table)
 	i = 0;
 	while (i < philo_num)
 	{
-		(void)pthread_create(&philo[i]->thread_id, NULL, (void *)philosopher, table->philo[i]);
+		if ((pthread_create(&philo[i]->thread_id, NULL, (void *)philosopher, table->philo[i])) != 0)
+			return (FAIL);
 		i++;
 	}
+	return (SUCCESS);
 }
 
-void	join_philo_pthread(t_diningtable *table)
+int	join_philo_pthread(t_diningtable *table)
 {
 	int	philo_num;
 	int	i;
@@ -41,7 +57,9 @@ void	join_philo_pthread(t_diningtable *table)
 	i = 0;
 	while (i < philo_num)
 	{
-		(void)pthread_join(table->philo[i]->thread_id, NULL);
+		if (pthread_join(table->philo[i]->thread_id, NULL) != 0)
+			return (FAIL);
 		i++;
 	}
+	return (SUCCESS);
 }

@@ -13,8 +13,8 @@
 #define NO_USE -1
 #define CANNOT_EAT 1
 #define CAN_EAT 0
-void	create_philo_pthread(t_diningtable *);
-void	join_philo_pthread(t_diningtable *);
+int		create_philo_pthread(t_diningtable *);
+int		join_philo_pthread(t_diningtable *);
 size_t	get_timestamp(void);
 void	eat(t_philo *);
 void	philo_sleep(t_philo *);

@@ -11,6 +11,7 @@ void	free_array(int i, int type, void *arg)
 	{
 		if (type == FREE_PHILO)
 		{
+			pthread_mutex_destroy(&(((t_philo **)arg)[i]->mutex));
 			free(((t_philo **)arg)[i]);
 		}
 		else
@@ -23,7 +24,7 @@ void	free_array(int i, int type, void *arg)
 	free(arg);
 }
 
-void destroy_variables(t_diningtable *table)
+void	destroy_variables(t_diningtable *table)
 {
 	free_array(table->philo_num, FREE_PHILO, table->philo);
 	free_array(table->philo_num, FREE_FORK, table->fork);

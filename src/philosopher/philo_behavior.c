@@ -17,16 +17,14 @@ size_t get_timestamp(void)
 
 static void	print_timestamp(t_philo *philo, char *MSG)
 {
-	if (philo->state == PHILO_DIED)
+	if (philo->stop_flg == PHILO_DIED || philo->stop_flg == ERR)
 		return ;
 	printf("%lu %d %s\n", get_timestamp(), philo->philo_id + 1, MSG);
 }
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->mutex));
 	philo->state = PHILO_EAT;
-	pthread_mutex_unlock(&(philo->mutex));
 	philo->timestamp = get_timestamp();
 	while (philo->parmission)
 		usleep(100);
@@ -41,9 +39,7 @@ void	eat(t_philo *philo)
 
 void	philo_sleep(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->mutex));
 	philo->state = PHILO_SLEEP;
-	pthread_mutex_unlock(&(philo->mutex));
 	put_right_fork(philo);
 	put_left_fork(philo);
 	print_timestamp(philo, SLEEP_MSG);
@@ -52,8 +48,6 @@ void	philo_sleep(t_philo *philo)
 
 void	think(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->mutex));
 	philo->state = PHILO_THINK;
-	pthread_mutex_unlock(&(philo->mutex));
 	print_timestamp(philo, THINK_MSG);
 }

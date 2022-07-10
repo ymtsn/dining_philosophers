@@ -1,3 +1,4 @@
 philosophers.code-workspace
 philo
 *.o
+.vscode/settings.json
