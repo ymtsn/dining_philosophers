@@ -12,8 +12,6 @@ void	take_right_fork(t_philo *philo)
 	if (philo->state == PHILO_DIED)
 		return ;
 	pthread_mutex_lock(&(philo->right_fork->mutex));
-	philo->right_fork->use = philo->philo_id;
-
 }
 
 void	take_left_fork(t_philo *philo)
@@ -21,17 +19,18 @@ void	take_left_fork(t_philo *philo)
 	if (philo->state == PHILO_DIED)
 		return ;
 	pthread_mutex_lock(&(philo->left_fork->mutex));
-	philo->left_fork->use = philo->philo_id;
 }
 
 void	put_right_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(&(philo->right_fork->mutex));
 	philo->right_fork->use = NO_USE;
+	philo->parmission = CANNOT_EAT;
+	pthread_mutex_unlock(&(philo->right_fork->mutex));
 }
 
 void	put_left_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(&(philo->left_fork->mutex));
 	philo->left_fork->use = NO_USE;
+	philo->parmission = CANNOT_EAT;
+	pthread_mutex_unlock(&(philo->left_fork->mutex));
 }

@@ -27,6 +27,5 @@ void destroy_variables(t_diningtable *table)
 {
 	free_array(table->philo_num, FREE_PHILO, table->philo);
 	free_array(table->philo_num, FREE_FORK, table->fork);
-	free(table->waitor);
 	free(table);
 }

@@ -23,17 +23,10 @@ t_diningtable	*create_variables(int argc, char *argv[])
 	table->eat = atoi(argv[EAT_TIME_INDEX]);
 	table->sleep = atoi(argv[SLEEP_TIME_INDEX]);
 /* table->must_eat = atoi(argv[MUST_EAT_INDEX]); */
-	table->waitor = create_waitor_variable();
-	if (table->waitor == NULL)
-	{
-		free(table);
-		return (NULL);
-	}
 	table->fork = create_fork_variables(table->philo_num);
 	if (table->fork == NULL)
 	{
 		free(table);
-		free(table->waitor);
 		return (NULL);
 	}
 	table->philo = create_philo_variables(table);
@@ -41,7 +34,6 @@ t_diningtable	*create_variables(int argc, char *argv[])
 	{
 		free_array(table->philo_num, FREE_FORK, table->fork);
 		free(table);
-		free(table->waitor);
 		return (NULL);
 	}
 	return (table);

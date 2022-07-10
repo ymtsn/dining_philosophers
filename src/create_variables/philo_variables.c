@@ -29,9 +29,9 @@ static int	init_philo_variables(t_diningtable *table)
 		table->philo[i]->thread_id = (pthread_t)-1;
 		table->philo[i]->table = (void *)table;
 		table->philo[i]->timestamp = 0;
+		table->philo[i]->parmission = CANNOT_EAT;
 		table->philo[i]->state = PHILO_INIT;
 		pthread_mutex_init(&table->philo[i]->mutex, NULL);
-		table->philo[i]->waitor = table->waitor;
 		table->philo[i]->right_fork = table->fork[i];
 		table->philo[i]->left_fork = table->fork[(i + 1) % table->philo_num];
 		i++;

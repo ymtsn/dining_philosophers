@@ -28,13 +28,12 @@ void	eat(t_philo *philo)
 	philo->state = PHILO_EAT;
 	pthread_mutex_unlock(&(philo->mutex));
 	philo->timestamp = get_timestamp();
-	while (waitor(philo))
-		usleep(1);
+	while (philo->parmission)
+		usleep(100);
 	take_right_fork(philo);
 	print_timestamp(philo, FORK_MSG);
 	take_left_fork(philo);
 	print_timestamp(philo, FORK_MSG);
-	pthread_mutex_unlock(&philo->waitor->mutex);
 	print_timestamp(philo, EAT_MSG);
 	usleep(((t_diningtable*)philo->table)->eat * 1000);
 	philo->timestamp = get_timestamp();

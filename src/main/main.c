@@ -5,6 +5,7 @@
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 #include "philo_monitor.h"
+#include "philo_waiter.h"
 #include "philo_debug.h"
 
 int	main(int argc,	char *argv[])
@@ -17,7 +18,9 @@ int	main(int argc,	char *argv[])
 		return (1);
 	create_philo_pthread(table);
 	create_monitor_pthread(table);
+	create_waiter_pthread(table);
 	join_monitor_pthread(table);
+	join_waiter_pthread(table);
 	destroy_variables(table);
 /* 	print_philo(table);
 	print_fork(table); */
