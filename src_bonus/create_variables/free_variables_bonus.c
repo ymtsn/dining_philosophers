@@ -1,9 +1,9 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "philo_define.h"
-#include "philo_struct.h"
-#include "philo_create_variables.h"
+#include "philo_define_bonus.h"
+#include "philo_struct_bonus.h"
+#include "philo_create_variables_bonus.h"
 
 void	free_array(int i, int type, void *arg)
 {

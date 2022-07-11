@@ -1,4 +1,5 @@
 philosophers.code-workspace
 philo
+philo_bonus
 *.o
 .vscode/settings.json
