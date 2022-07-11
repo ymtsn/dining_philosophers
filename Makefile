@@ -1,4 +1,4 @@
-NAME				=	philo
+NAME				=	$(PHILO_NAME_DIR)/philo
 CC					=	gcc
 COMPILE_FLAGS		=	-Wall -Wextra -Werror $(INCLUDE_FLAGS) $(DEBUG_FLAGS)
 SRC_DIR				=	./src
@@ -6,6 +6,7 @@ OBJ_DIR				=	./obj
 INCLUCDE_DIR		=	./include
 INCLUDE_FLAGS		=	-I $(INCLUCDE_DIR)
 DEBUG_FLAGS			=	-g
+PHILO_NAME_DIR		=	./philo
 
 MAIN_DIR			=	$(SRC_DIR)/main
 MAIN_SRC			=	main.c
@@ -53,6 +54,7 @@ OBJ_LIST			=	$(MAIN_OBJ_FULLNAME) \
 
 all		:	$(NAME)
 $(NAME)	:	$(OBJ_LIST)
+	@mkdir -p $(PHILO_NAME_DIR)
 	$(CC) $(OBJ_LIST) -o $(NAME)
 
 $(OBJ_DIR)/%.o:$(MAIN_DIR)/%.c

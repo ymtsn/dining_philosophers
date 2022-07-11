@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "philo_define.h"
 #include "philo_struct.h"
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"

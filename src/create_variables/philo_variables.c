@@ -1,14 +1,10 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include "philo_define.h"
 #include "philo_struct.h"
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
-#define PHILO_NUM_INDEX 1
-#define DIE_TIME_INDEX 2
-#define EAT_TIME_INDEX 3
-#define SLEEP_TIME_INDEX 4
-#define MUST_EAT_INDEX 5
 
 static int	init_philo_variables(t_diningtable *table)
 {
@@ -31,7 +27,6 @@ static int	init_philo_variables(t_diningtable *table)
 		table->philo[i]->state = PHILO_INIT;
 		table->philo[i]->stop_flg = 0;
 		table->philo[i]->must_eat = table->must_eat;
-		pthread_mutex_init(&table->philo[i]->mutex, NULL);
 		table->philo[i]->right_fork = table->fork[i];
 		table->philo[i]->left_fork = table->fork[(i + 1) % table->philo_num];
 		i++;

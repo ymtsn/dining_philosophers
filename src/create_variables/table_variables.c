@@ -2,13 +2,9 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
+#include "philo_define.h"
 #include "philo_struct.h"
 #include "philo_create_variables.h"
-#define PHILO_NUM_INDEX 1
-#define DIE_TIME_INDEX 2
-#define EAT_TIME_INDEX 3
-#define SLEEP_TIME_INDEX 4
-#define MUST_EAT_INDEX 5
 
 static void	load_argv(int argc, char *argv[], t_diningtable *table)
 {

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/time.h>
+#include "philo_define.h"
 #include "philo_struct.h"
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
@@ -33,6 +34,9 @@ void	eat(t_philo *philo)
 	take_left_fork(philo);
 	print_timestamp(philo, FORK_MSG);
 	print_timestamp(philo, EAT_MSG);
+	philo->parmission = CANNOT_EAT;
+	philo->right_fork->use = NO_USE;
+	philo->left_fork->use = NO_USE;
 	usleep(((t_diningtable*)philo->table)->eat * 1000);
 	philo->timestamp = get_timestamp();
 }

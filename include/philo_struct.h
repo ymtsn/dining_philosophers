@@ -6,6 +6,7 @@
 typedef struct s_fork{
 	int				fork_id;
 	int				use;
+	int				use_philo_id;
 	pthread_mutex_t	mutex;
 } t_fork;
 typedef struct s_philo{
@@ -18,7 +19,6 @@ typedef struct s_philo{
 	size_t			timestamp;
 	t_fork			*right_fork;
 	t_fork			*left_fork;
-	pthread_mutex_t	mutex;
 	int				parmission;
 }t_philo;
 typedef struct s_diningtable{
