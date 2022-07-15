@@ -8,7 +8,7 @@
 void	free_array(int i, int type, void *arg)
 {
 	i--;
-	while (i <= 0)
+	while (i >= 0)
 	{
 		if (type == FREE_PHILO)
 		{

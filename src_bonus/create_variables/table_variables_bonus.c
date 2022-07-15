@@ -35,16 +35,10 @@ t_diningtable	*create_table_variables(int argc, char *argv[])
 	if (table == NULL)
 		return (NULL);
 	load_argv(argc, argv, table);
-	table->fork = create_fork_variables(table->philo_num);
-	if (table->fork == NULL)
-	{
-		free(table);
-		return (NULL);
-	}
 	table->philo = create_philo_variables(table);
 	if (table->philo == NULL)
 	{
-		free_array(table->philo_num, FREE_FORK, table->fork);
+		free(table->sema);
 		free(table);
 		return (NULL);
 	}

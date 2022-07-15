@@ -29,10 +29,10 @@ MAIN_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MAIN_OBJ)
 
 PHILO_DIR			=	$(SRC_DIR)/philosopher
 ifdef DO_BONUS
-PHILO_SRC			=	philo_behavior_bonus.c philo_fork_bonus.c philo_pthread_bonus.c
+PHILO_SRC			=	philo_behavior_bonus.c philo_fork_bonus.c philo_create_process_bonus.c
 PHILO_SRC_FULLNAME	=	$(addprefix ./src_bonus/philosopher/, $(PHILO_SRC))
 else
-PHILO_SRC			=	philo_behavior.c philo_fork.c philo_pthread.c
+PHILO_SRC			=	philo_behavior.c philo_fork.c philo_pthread_bonus.c
 PHILO_SRC_FULLNAME	=	$(addprefix ./src/philosopher/, $(PHILO_SRC))
 endif
 PHILO_OBJ			=	$(PHILO_SRC:.c=.o)
@@ -40,7 +40,7 @@ PHILO_OBJ_FULLNAME	=	$(addprefix ./obj/, $(PHILO_OBJ))
 
 CREATE_VARIABLES_DIR			=	$(SRC_DIR)/create_variables
 ifdef DO_BONUS
-CREATE_VARIABLES_SRC			=	table_variables_bonus.c fork_variables_bonus.c free_variables_bonus.c ft_atol_bonus.c ft_bzero_bonus.c philo_variables_bonus.c
+CREATE_VARIABLES_SRC			=	table_variables_bonus.c free_variables_bonus.c ft_atol_bonus.c ft_bzero_bonus.c philo_variables_bonus.c
 CREATE_VARIABLES_SRC_FULLNAME	=	$(addprefix ./src/create_variables_bonus/, $(CREATE_VARIABLES_SRC))
 else
 CREATE_VARIABLES_SRC			=	table_variables.c fork_variables.c free_variables.c ft_atol.c ft_bzero.c philo_variables.c
@@ -125,6 +125,7 @@ clean	:
 
 fclean	:clean
 	rm -rf $(NAME)
+	rm -rf ./philo_bonus/philo_bonus
 
 re		:fclean
 	all

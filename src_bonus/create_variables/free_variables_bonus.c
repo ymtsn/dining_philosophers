@@ -5,20 +5,12 @@
 #include "philo_struct_bonus.h"
 #include "philo_create_variables_bonus.h"
 
-void	free_array(int i, int type, void *arg)
+void	free_array(int i, void *arg)
 {
 	i--;
-	while (i <= 0)
+	while (i >= 0)
 	{
-		if (type == FREE_PHILO)
-		{
 			free(((t_philo **)arg)[i]);
-		}
-		else
-		{
-			pthread_mutex_destroy(&(((t_fork **)arg)[i]->mutex));
-			free(((t_fork **)arg)[i]);
-		}
 		i--;
 	}
 	free(arg);
@@ -26,7 +18,8 @@ void	free_array(int i, int type, void *arg)
 
 void	destroy_variables(t_diningtable *table)
 {
-	free_array(table->philo_num, FREE_PHILO, table->philo);
-	free_array(table->philo_num, FREE_FORK, table->fork);
+	free_array(table->philo_num, table->philo);
+	sem_close(table->sema);
+	sem_unlink("./philo_bonus/philo_bonus");
 	free(table);
 }

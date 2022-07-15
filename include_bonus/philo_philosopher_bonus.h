@@ -10,6 +10,7 @@ void	take_right_fork(t_philo *);
 void	take_left_fork(t_philo *);
 void	put_right_fork(t_philo *);
 void	put_left_fork(t_philo *);
-void	philosopher(void *);
+sem_t	*my_sem_open(t_diningtable *);
+void	philosopher(t_diningtable *);
 void	destroy_variables(t_diningtable *);
 #endif

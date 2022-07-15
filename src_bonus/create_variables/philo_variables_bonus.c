@@ -1,10 +1,13 @@
 #include <pthread.h>
+#include <semaphore.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stddef.h>
 #include "philo_define_bonus.h"
 #include "philo_struct_bonus.h"
 #include "philo_create_variables_bonus.h"
 #include "philo_philosopher_bonus.h"
+#include <stdio.h>
 
 static int	init_philo_variables(t_diningtable *table)
 {
@@ -16,19 +19,20 @@ static int	init_philo_variables(t_diningtable *table)
 		table->philo[i] = malloc(sizeof(t_philo));
 		if (table->philo[i] == NULL)
 		{
-			free_array(i, FREE_PHILO, table->philo);
+			free_array(i, table->philo);
 			return (FAIL);
 		}
 		table->philo[i]->philo_id = i;
-		table->philo[i]->thread_id = (pthread_t)0;
-		table->philo[i]->table = (void *)table;
 		table->philo[i]->timestamp = 0;
 		table->philo[i]->parmission = CANNOT_EAT;
 		table->philo[i]->state = PHILO_INIT;
+		table->philo[i]->die = table->die;
+		table->philo[i]->eat = table->eat;
+		table->philo[i]->sleep = table->sleep;
 		table->philo[i]->stop_flg = 0;
+		table->philo[i]->sema = NULL;
+		table->philo[i]->monitor_tid = (pthread_t)0;
 		table->philo[i]->must_eat = table->must_eat;
-		table->philo[i]->right_fork = table->fork[i];
-		table->philo[i]->left_fork = table->fork[(i + 1) % table->philo_num];
 		i++;
 	}
 	return (SUCCESS);

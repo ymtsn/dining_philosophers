@@ -26,26 +26,11 @@ void	print_philo(t_diningtable *table)
 	while (i < philo_num)
 	{
 		printf("philo_id:%d\n", philo[i]->philo_id);
-		printf("thread_id:%d\n", (int)(philo[i]->thread_id));
-		printf("die:%d\n", ((t_diningtable*)philo[i]->table)->die);
-		printf("eat:%d\n", ((t_diningtable*)philo[i]->table)->eat);
-		printf("sleep:%d\n", ((t_diningtable*)philo[i]->table)->sleep);
+		printf("stop_flg:%d\n", philo[i]->stop_flg);
 		i++;
 	}
-}
-
-void	print_fork(t_diningtable *table)
-{
-	int		i;
-	int		philo_num;
-	t_fork	**fork;
-
-	i = 0;
-	philo_num = table->philo_num;
-	fork = table->fork;
-	while (i < philo_num)
-	{
-		printf("fork_id:%d\n", fork[i]->fork_id);
-		i++;
-	}
+		printf("philo_num:%d\n", table->philo_num);
+		printf("die:%d\n", table->die);
+		printf("eat:%d\n", table->eat);
+		printf("sleep:%d\n", table->sleep);
 }

@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "philo_define_bonus.h"
 #include "philo_struct_bonus.h"
 #include "philo_create_variables_bonus.h"
@@ -17,56 +18,42 @@ static	void do_monitoring(t_philo *philo)
 	size_t	now;
 	int		diff;
 
-	if (philo->stop_flg == PHILO_DIED || philo->timestamp == 0)
+	if (philo->timestamp == 0)
 		return ;
 	now = get_timestamp();
 	diff = (int)(now - philo->timestamp);
-	if (diff >= ((t_diningtable*)philo->table)->die)
+	if (diff >= philo->die)
 	{
 		philo->stop_flg = PHILO_DIED;
 		philo->must_eat = 0;
 		print_die_timestamp(philo, DIE_MSG);
-		pthread_detach(philo->thread_id);
 	}
 }
 
 void	monitor(void *arg)
 {
-	int				i;
-	int				upper_array;
-	t_diningtable	*table;
-	int				continue_flg;
+	t_philo	*philo;
 
-	table = (t_diningtable*)arg;
-	i = 0;
-	upper_array = table->philo_num;
+	philo = (t_philo*)arg;
 	while(1)
 	{
-		continue_flg = STOP;
-		while (i < upper_array)
-		{
-			if (table->philo[i]->timestamp != 0 && table->philo[i]->stop_flg != PHILO_DIED)
-				do_monitoring(table->philo[i]);
-			if (table->philo[i]->stop_flg != PHILO_DIED)
-				continue_flg = CONTINUE;
-			i++;
-		}
-		if (continue_flg == STOP)
-			return ;
-		i = 0;
+		do_monitoring(philo);
+		if (philo->stop_flg == PHILO_DIED)
+			exit(0);
+		usleep(100);
 	}
 }
 
-int	create_monitor_pthread(t_diningtable *table)
+int	create_monitor_pthread(t_philo *philo)
 {
-	if (pthread_create(&table->monitor_tid, NULL, (void *)monitor, table) != 0)
+	if (pthread_create(&philo->monitor_tid, NULL, (void *)monitor, philo) != 0)
 		return (FAIL);
 	return (SUCCESS);
 }
 
-int	join_monitor_pthread(t_diningtable *table)
+int	join_monitor_pthread(t_philo *philo)
 {
-	if (pthread_join(table->monitor_tid, NULL) != 0)
+	if (pthread_join(philo->monitor_tid, NULL) != 0)
 		return (FAIL);
 	return (SUCCESS);
 }
