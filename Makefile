@@ -22,7 +22,6 @@ ifdef DO_BONUS
 MAIN_SRC			=	main_bonus.c
 else
 MAIN_SRC			=	main.c
-endif
 MAIN_SRC_FULLNAME	=	$(MAIN_SRC_DIR)/$(MAIN_SRC)
 MAIN_OBJ			=	$(MAIN_SRC:.c=.o)
 MAIN_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MAIN_OBJ)
@@ -61,8 +60,6 @@ MONITOR_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MONITOR_OBJ)
 
 WAITER_DIR				=	$(SRC_DIR)/waiter
 ifdef DO_BONUS
-WAITER_SRC				=	waiter_bonus.c
-WAITEER_SRC_FULLNAME	=	$(addprefix ./src_bonus/waiter/, $(WAITER_SRC))
 else
 WAITER_SRC				=	waiter.c
 WAITEER_SRC_FULLNAME	=	$(addprefix ./src/waiter/, $(WAITER_SRC))

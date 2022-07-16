@@ -22,7 +22,7 @@ static	void do_monitoring(t_philo *philo)
 		return ;
 	now = get_timestamp();
 	diff = (int)(now - philo->timestamp);
-	if (diff >= philo->die)
+	if (diff >= ((t_diningtable *)(philo->table))->die)
 	{
 		philo->stop_flg = PHILO_DIED;
 		philo->must_eat = 0;

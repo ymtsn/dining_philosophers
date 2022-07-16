@@ -33,7 +33,7 @@ void	eat(t_philo *philo)
 	print_timestamp(philo, FORK_MSG);
 	print_timestamp(philo, EAT_MSG);
 	philo->parmission = CANNOT_EAT;
-	usleep(philo->eat * 1000);
+	usleep(((t_diningtable *)(philo->table))->eat * 1000);
 	philo->timestamp = get_timestamp();
 }
 
@@ -43,7 +43,7 @@ void	philo_sleep(t_philo *philo)
 	put_right_fork(philo);
 	put_left_fork(philo);
 	print_timestamp(philo, SLEEP_MSG);
-	usleep(philo->sleep * 1000);
+	usleep(((t_diningtable *)(philo->table))->sleep * 1000);
 }
 
 void	think(t_philo *philo)

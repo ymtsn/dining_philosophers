@@ -57,18 +57,18 @@ void	philosopher(t_diningtable *table)
 		table->philo[i]->pid = fork();
 		if (table->philo[i]->pid == 0)
 		{
-			/* if (create_monitor_pthread(table->philo[i]) == FAIL)
+			if (create_monitor_pthread(table->philo[i]) == FAIL)
 			{
 				printf("err monitor create thread\n");
 				exit(0);
-			} */
+			}
 			table->philo[i]->sema = sema;
 			do_philosopher(table->philo[i]);
-			/* if (join_monitor_pthread(table->philo[i]) == FAIL)
+			if (join_monitor_pthread(table->philo[i]) == FAIL)
 			{
 				printf("err monitor join thread\n");
 				exit(0);
-			} */
+			}
 			exit(0);
 		}
 		i++;

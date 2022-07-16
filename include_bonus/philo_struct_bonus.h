@@ -7,9 +7,7 @@
 typedef struct s_philo{
 	int				philo_id;
 	int				state;
-	int				die;
-	int				eat;
-	int				sleep;
+	void			*table;
 	int				must_eat;
 	int				stop_flg;
 	size_t			timestamp;
