@@ -1,89 +1,95 @@
 CC					=	gcc
 COMPILE_FLAGS		=	-Wall -Wextra -Werror $(INCLUDE_FLAGS) $(DEBUG_FLAGS)
-
-ifdef DO_BONUS
-NAME				=	$(PHILO_NAME_DIR)/philo_bonus
-PHILO_NAME_DIR		=	./philo_bonus
-SRC_DIR				=	./src_bonus
-INCLUCDE_DIR		=	./include_bonus
-else
-NAME				=	$(PHILO_NAME_DIR)/philo
-PHILO_NAME_DIR		=	./philo
-SRC_DIR				=	./src
-INCLUCDE_DIR		=	./include
-endif
-
-OBJ_DIR				=	./obj
 INCLUDE_FLAGS		=	-I $(INCLUCDE_DIR)
 DEBUG_FLAGS			=	-g
 
-MAIN_DIR			=	$(SRC_DIR)/main
-ifdef DO_BONUS
-MAIN_SRC			=	main_bonus.c
-else
 MAIN_SRC			=	main.c
-MAIN_SRC_FULLNAME	=	$(MAIN_SRC_DIR)/$(MAIN_SRC)
+MAIN_SRC_FULLNAME	=	$(addprefix ./src/main/, $(MAIN_SRC))
 MAIN_OBJ			=	$(MAIN_SRC:.c=.o)
-MAIN_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MAIN_OBJ)
+MAIN_OBJ_FULLNAME	=	$(addprefix ./obj/, $(MAIN_OBJ))
 
-PHILO_DIR			=	$(SRC_DIR)/philosopher
-ifdef DO_BONUS
-PHILO_SRC			=	philo_behavior_bonus.c philo_fork_bonus.c philo_create_process_bonus.c
-PHILO_SRC_FULLNAME	=	$(addprefix ./src_bonus/philosopher/, $(PHILO_SRC))
-else
-PHILO_SRC			=	philo_behavior.c philo_fork.c philo_pthread_bonus.c
+MAIN_SRC_BONUS			=	main_bonus.c
+MAIN_SRC_FULLNAME_BONUS	=	$(addprefix ./src_bonus/main/, $(MAIN_SRC_BONUS))
+MAIN_OBJ_BONUS			=	$(MAIN_SRC_BONUS:.c=.o)
+MAIN_OBJ_FULLNAME_BONUS	=	$(addprefix ./obj_bonus/, $(MAIN_OBJ_BONUS))
+
+PHILO_SRC			=	philo_behavior.c philo_fork.c philo_pthread.c
 PHILO_SRC_FULLNAME	=	$(addprefix ./src/philosopher/, $(PHILO_SRC))
-endif
 PHILO_OBJ			=	$(PHILO_SRC:.c=.o)
 PHILO_OBJ_FULLNAME	=	$(addprefix ./obj/, $(PHILO_OBJ))
 
-CREATE_VARIABLES_DIR			=	$(SRC_DIR)/create_variables
-ifdef DO_BONUS
-CREATE_VARIABLES_SRC			=	table_variables_bonus.c free_variables_bonus.c ft_atol_bonus.c ft_bzero_bonus.c philo_variables_bonus.c
-CREATE_VARIABLES_SRC_FULLNAME	=	$(addprefix ./src/create_variables_bonus/, $(CREATE_VARIABLES_SRC))
-else
-CREATE_VARIABLES_SRC			=	table_variables.c fork_variables.c free_variables.c ft_atol.c ft_bzero.c philo_variables.c
-CREATE_VARIABLES_SRC_FULLNAME	=	$(addprefix ./src/create_variables/, $(CREATE_VARIABLES_SRC))
-endif
-CREATE_VARIABLES_OBJ			=	$(CREATE_VARIABLES_SRC:.c=.o)
-CREATE_VARIABLES_OBJ_FULLNAME	=	$(addprefix ./obj/, $(CREATE_VARIABLES_OBJ))
+PHILO_SRC_BONUS				=	philo_behavior_bonus.c philo_fork_bonus.c philo_create_process_bonus.c
+PHILO_SRC_FULLNAME_BONUS	=	$(addprefix ./src_bonus/philosopher/, $(PHILO_SRC_BONUS))
+PHILO_OBJ_BONUS				=	$(PHILO_SRC_BONUS:.c=.o)
+PHILO_OBJ_FULLNAME_BONUS	=	$(addprefix ./obj_bonus/, $(PHILO_OBJ_BONUS))
 
-MONITOR_DIR				=	$(SRC_DIR)/monitor
-ifdef DO_BONUS
-MONITOR_SRC				=	monitor_bonus.c
-else
+CREATE_VARIABLES_SRC				=	table_variables.c fork_variables.c free_variables.c ft_atol.c ft_bzero.c philo_variables.c
+CREATE_VARIABLES_SRC_FULLNAME		=	$(addprefix ./src/create_variables/, $(CREATE_VARIABLES_SRC))
+CREATE_VARIABLES_OBJ				=	$(CREATE_VARIABLES_SRC:.c=.o)
+CREATE_VARIABLES_OBJ_FULLNAME		=	$(addprefix ./obj/, $(CREATE_VARIABLES_OBJ))
+
+CREATE_VARIABLES_SRC_BONUS			=	table_variables_bonus.c free_variables_bonus.c ft_atol_bonus.c ft_bzero_bonus.c philo_variables_bonus.c
+CREATE_VARIABLES_SRC_FULLNAME_BONUS	=	$(addprefix ./src/create_variables_bonus/, $(CREATE_VARIABLES_SRC_BONUS))
+CREATE_VARIABLES_OBJ_BONUS			=	$(CREATE_VARIABLES_SRC_BONUS:.c=.o)
+CREATE_VARIABLES_OBJ_FULLNAME_BONUS	=	$(addprefix ./obj_bonus/, $(CREATE_VARIABLES_OBJ_BONUS))
+
 MONITOR_SRC				=	monitor.c
-endif
-MONITOR_SRC_FULLNAME	=	$(MONITOR_DIR)/$(MONITOR_SRC)
+MONITOR_SRC_FULLNAME	=	$(addprefix ./src/monitor/, $(MONITOR_SRC))
 MONITOR_OBJ				=	$(MONITOR_SRC:.c=.o)
-MONITOR_OBJ_FULLNAME	=	$(OBJ_DIR)/$(MONITOR_OBJ)
+MONITOR_OBJ_FULLNAME	=	$(addprefix ./obj/, $(MONITOR_OBJ))
 
-WAITER_DIR				=	$(SRC_DIR)/waiter
-ifdef DO_BONUS
-else
+MONITOR_SRC_BONUS			=	monitor_bonus.c
+MONITOR_SRC_FULLNAME_BONUS	=	$(addprefix ./src_bonus/monitor/, $(MONITOR_SRC))
+MONITOR_OBJ_BONUS			=	$(MONITOR_SRC_BONUS:.c=.o)
+MONITOR_OBJ_FULLNAME_BONUS	=	$(addprefix ./obj_bonus/, $(MONITOR_OBJ_BONUS))
+
+WAITER_DIR				=	./src/waiter
 WAITER_SRC				=	waiter.c
 WAITEER_SRC_FULLNAME	=	$(addprefix ./src/waiter/, $(WAITER_SRC))
-endif
 WAITER_OBJ				=	$(WAITER_SRC:.c=.o)
 WAITER_OBJ_FULLNAME		=	$(addprefix ./obj/, $(WAITER_OBJ))
 
-DEBUG_DIR			=	$(SRC_DIR)/debug
-ifdef DO_BONUS
-DEBUG_SRC			=	debug_bonus.c
-else
+DEBUG_DIR			=	./src/debug
 DEBUG_SRC			=	debug.c
-endif
-DEBUG_SRC_FULLNAME	=	$(DEBUG_DIR)/$(DEBUG_SRC)
+DEBUG_SRC_FULLNAME	=	$(addprefix ./src/debug/, $(DEBUG_SRC))
 DEBUG_OBJ			=	$(DEBUG_SRC:.c=.o)
-DEBUG_OBJ_FULLNAME	=	$(OBJ_DIR)/$(DEBUG_OBJ)
+DEBUG_OBJ_FULLNAME	=	$(addprefix ./obj/, $(DEBUG_OBJ))
 
-OBJ_LIST			=	$(MAIN_OBJ_FULLNAME) \
+OBJ_LIST_MAN		=	$(MAIN_OBJ_FULLNAME) \
 						$(CREATE_VARIABLES_OBJ_FULLNAME) \
 						$(PHILO_OBJ_FULLNAME) \
 						$(FORK_OBJ_FULLNAME) \
 						$(MONITOR_OBJ_FULLNAME) \
 						$(WAITER_OBJ_FULLNAME) \
 						$(DEBUG_OBJ_FULLNAME)
+OBJ_LIST_BONUS		=	$(MAIN_OBJ_FULLNAME_BONUS) \
+						$(CREATE_VARIABLES_OBJ_FULLNAME_BONUS) \
+						$(PHILO_OBJ_FULLNAME_BONUS) \
+						$(FORK_OBJ_FULLNAME_BONUS) \
+						$(MONITOR_OBJ_FULLNAME_BONUS) \
+						$(DEBUG_OBJ_FULLNAME)
+
+ifdef DO_BONUS
+NAME					=	$(PHILO_NAME_DIR)/philo
+PHILO_NAME_DIR			=	./philo_bonus
+MAIN_DIR				=	./src_bonus/main
+CREATE_VARIABLES_DIR 	=	./src_bonus/create_variables
+PHILO_DIR 				=	./src_bonus/philosopher
+MONITOR_DIR 			=	./src_bonus/monitor
+INCLUCDE_DIR			=	./include_bonus
+OBJ_DIR					=	./obj_bonus
+OBJ_LIST 				= $(OBJ_LIST_BONUS)
+else
+NAME					=	$(PHILO_NAME_DIR)/philo
+PHILO_NAME_DIR			=	./philo
+MAIN_DIR				=	./src/main
+CREATE_VARIABLES_DIR 	=	./src/create_variables
+PHILO_DIR 				=	./src/philosopher
+MONITOR_DIR 			=	./src/monitor
+INCLUCDE_DIR			=	./include
+OBJ_DIR					=	./obj
+OBJ_LIST 				= $(OBJ_LIST_MAN)
+endif
 
 all		:	$(NAME)
 $(NAME)	:	$(OBJ_LIST)
@@ -118,10 +124,11 @@ bonus	:
 	make DO_BONUS=yes
 
 clean	:
-	rm -rf $(OBJ_LIST)
+	rm -rf $(OBJ_LIST_MAN)
+	rm -rf $(OBJ_LIST_BONUS)
 
 fclean	:clean
-	rm -rf $(NAME)
+	rm -rf ./philo/philo
 	rm -rf ./philo_bonus/philo_bonus
 
 re		:fclean

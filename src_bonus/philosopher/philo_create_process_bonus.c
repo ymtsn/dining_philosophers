@@ -60,14 +60,14 @@ void	philosopher(t_diningtable *table)
 			if (create_monitor_pthread(table->philo[i]) == FAIL)
 			{
 				printf("err monitor create thread\n");
-				exit(0);
+				exit(1);
 			}
 			table->philo[i]->sema = sema;
 			do_philosopher(table->philo[i]);
 			if (join_monitor_pthread(table->philo[i]) == FAIL)
 			{
 				printf("err monitor join thread\n");
-				exit(0);
+				exit(1);
 			}
 			exit(0);
 		}
