@@ -30,9 +30,26 @@ void	do_philosopher(t_philo *philo)
 	sem_close(philo->sema);
 }
 
+void	manage_philo_monitor(t_philo *philo, sem_t *sema)
+{
+	if (create_monitor_pthread(philo) == FAIL)
+	{
+		printf("err monitor create thread\n");
+		exit(1);
+	}
+	philo->sema = sema;
+	do_philosopher(philo);
+	if (join_monitor_pthread(philo) == FAIL)
+	{
+		printf("err monitor join thread\n");
+		exit(1);
+	}
+	exit(0);
+}
+
 sem_t	*my_sem_open(t_diningtable *table)
 {
-	sem_t *sema;
+	sem_t	*sema;
 
 	sema = sem_open("/sem", O_CREAT, 0600, table->philo_num);
 	if (sema == (sem_t *)SEM_FAILED)
@@ -42,35 +59,21 @@ sem_t	*my_sem_open(t_diningtable *table)
 
 void	philosopher(t_diningtable *table)
 {
-	int	i;
-	int	j;
-	int	status;
+	int		i;
+	int		j;
+	int		status;
 	sem_t	*sema;
 
 	i = 0;
 	j = 0;
 	sema = my_sem_open(table);
 	if (sema == NULL)
-		return;
+		return ;
 	while (i < table->philo_num)
 	{
 		table->philo[i]->pid = fork();
 		if (table->philo[i]->pid == 0)
-		{
-			if (create_monitor_pthread(table->philo[i]) == FAIL)
-			{
-				printf("err monitor create thread\n");
-				exit(1);
-			}
-			table->philo[i]->sema = sema;
-			do_philosopher(table->philo[i]);
-			if (join_monitor_pthread(table->philo[i]) == FAIL)
-			{
-				printf("err monitor join thread\n");
-				exit(1);
-			}
-			exit(0);
-		}
+			manage_philo_monitor(table->philo[i], sema);
 		i++;
 	}
 	while (j < table->philo_num)

@@ -8,7 +8,7 @@
 #include "philo_create_variables_bonus.h"
 #include "philo_philosopher_bonus.h"
 
-size_t get_timestamp(void)
+size_t	get_timestamp(void)
 {
 	struct timeval	tv;
 

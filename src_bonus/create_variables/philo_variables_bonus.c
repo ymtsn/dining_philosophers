@@ -14,7 +14,7 @@ static int	init_philo_variables(t_diningtable *table)
 	int	i;
 
 	i = 0;
-	while(i < table->philo_num)
+	while (i < table->philo_num)
 	{
 		table->philo[i] = malloc(sizeof(t_philo));
 		if (table->philo[i] == NULL)
@@ -38,8 +38,7 @@ static int	init_philo_variables(t_diningtable *table)
 
 t_philo	**create_philo_variables(t_diningtable *table)
 {
-
-	table->philo = malloc(sizeof(t_philo*)*table->philo_num);
+	table->philo = malloc(sizeof(t_philo *) * table->philo_num);
 	if (table->philo == NULL)
 		return (NULL);
 	if (init_philo_variables(table) == FAIL)

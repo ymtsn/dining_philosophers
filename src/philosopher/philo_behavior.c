@@ -8,7 +8,7 @@
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 
-size_t get_timestamp(void)
+size_t	get_timestamp(void)
 {
 	struct timeval	tv;
 
@@ -37,7 +37,7 @@ void	eat(t_philo *philo)
 	philo->parmission = CANNOT_EAT;
 	philo->right_fork->use = NO_USE;
 	philo->left_fork->use = NO_USE;
-	usleep(((t_diningtable*)philo->table)->eat * 1000);
+	usleep(((t_diningtable *)philo->table)->eat * 1000);
 	philo->timestamp = get_timestamp();
 }
 
@@ -47,7 +47,7 @@ void	philo_sleep(t_philo *philo)
 	put_right_fork(philo);
 	put_left_fork(philo);
 	print_timestamp(philo, SLEEP_MSG);
-	usleep(((t_diningtable*)philo->table)->sleep * 1000);
+	usleep(((t_diningtable *)philo->table)->sleep * 1000);
 }
 
 void	think(t_philo *philo)

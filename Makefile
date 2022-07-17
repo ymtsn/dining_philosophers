@@ -67,10 +67,9 @@ OBJ_LIST_BONUS		=	$(MAIN_OBJ_FULLNAME_BONUS) \
 						$(PHILO_OBJ_FULLNAME_BONUS) \
 						$(FORK_OBJ_FULLNAME_BONUS) \
 						$(MONITOR_OBJ_FULLNAME_BONUS) \
-						$(DEBUG_OBJ_FULLNAME)
 
 ifdef DO_BONUS
-NAME					=	$(PHILO_NAME_DIR)/philo
+NAME					=	$(PHILO_NAME_DIR)/philo_bonus
 PHILO_NAME_DIR			=	./philo_bonus
 MAIN_DIR				=	./src_bonus/main
 CREATE_VARIABLES_DIR 	=	./src_bonus/create_variables

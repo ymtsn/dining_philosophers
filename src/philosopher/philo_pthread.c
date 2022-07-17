@@ -12,7 +12,7 @@ void	philosopher(void *arg)
 {
 	t_philo			*philo;
 
-	philo = (t_philo*)arg;
+	philo = (t_philo *)arg;
 	while (philo->must_eat--)
 	{
 		eat(philo);
@@ -33,16 +33,17 @@ void	philosopher(void *arg)
 
 int	create_philo_pthread(t_diningtable *table)
 {
-	int	philo_num;
-	int	i;
-	t_philo **philo;
+	int		philo_num;
+	int		i;
+	t_philo	**philo;
 
 	philo = table->philo;
 	philo_num = table->philo_num;
 	i = 0;
 	while (i < philo_num)
 	{
-		if ((pthread_create(&philo[i]->thread_id, NULL, (void *)philosopher, table->philo[i])) != 0)
+		if ((pthread_create(&philo[i]->thread_id, NULL, \
+				(void *)philosopher, philo[i])) != 0)
 			return (FAIL);
 		i++;
 	}

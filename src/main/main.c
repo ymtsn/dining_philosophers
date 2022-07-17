@@ -46,9 +46,6 @@ int	main(int argc,	char *argv[])
 		destroy_variables(table);
 		return (1);
 	}
-	/* print_philo(table);
-	print_fork(table); */
 	destroy_variables(table);
 	return (0);
 }
-

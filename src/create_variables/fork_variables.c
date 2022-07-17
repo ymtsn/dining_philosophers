@@ -6,12 +6,12 @@
 #include "philo_create_variables.h"
 #include "philo_philosopher.h"
 
-static int init_fork_variables(int philo_num, t_fork **fork)
+static int	init_fork_variables(int philo_num, t_fork **fork)
 {
 	int	i;
 
 	i = 0;
-	while(i < philo_num)
+	while (i < philo_num)
 	{
 		fork[i] = malloc(sizeof(t_fork));
 		if (fork[i] == NULL)
@@ -28,11 +28,11 @@ static int init_fork_variables(int philo_num, t_fork **fork)
 	return (SUCCESS);
 }
 
-t_fork **create_fork_variables(int philo_num)
+t_fork	**create_fork_variables(int philo_num)
 {
 	t_fork	**fork;
 
-	fork = malloc(sizeof(t_fork*)*philo_num);
+	fork = malloc(sizeof(t_fork *) * philo_num);
 	if (fork == NULL)
 		return (NULL);
 	if (init_fork_variables(philo_num, fork) == FAIL)

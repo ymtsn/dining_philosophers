@@ -1,15 +1,15 @@
-#ifndef PHILO_PHILOSOPHERS_H
-#define PHILO_PHILOSOPHERS_H
-int		create_philo_pthread(t_diningtable *);
-int		join_philo_pthread(t_diningtable *);
+#ifndef PHILO_PHILOSOPHER_H
+# define PHILO_PHILOSOPHER_H
+int		create_philo_pthread(t_diningtable *table);
+int		join_philo_pthread(t_diningtable *table);
 size_t	get_timestamp(void);
-void	eat(t_philo *);
-void	philo_sleep(t_philo *);
-void	think(t_philo *);
-void	take_right_fork(t_philo *);
-void	take_left_fork(t_philo *);
-void	put_right_fork(t_philo *);
-void	put_left_fork(t_philo *);
-void	philosopher(void *);
-void	destroy_variables(t_diningtable *);
+void	eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	think(t_philo *philo);
+void	take_right_fork(t_philo *philo);
+void	take_left_fork(t_philo *philo);
+void	put_right_fork(t_philo *philo);
+void	put_left_fork(t_philo *philo);
+void	philosopher(void *arg);
+void	destroy_variables(t_diningtable *table);
 #endif

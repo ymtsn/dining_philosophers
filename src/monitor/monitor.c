@@ -12,7 +12,7 @@ static void	print_die_timestamp(t_philo *philo, char *MSG)
 	printf("%lu %d %s\n", get_timestamp(), philo->philo_id + 1, MSG);
 }
 
-static	void do_monitoring(t_philo *philo)
+static	void	do_monitoring(t_philo *philo)
 {
 	size_t	now;
 	int		diff;
@@ -21,7 +21,7 @@ static	void do_monitoring(t_philo *philo)
 		return ;
 	now = get_timestamp();
 	diff = (int)(now - philo->timestamp);
-	if (diff >= ((t_diningtable*)philo->table)->die)
+	if (diff >= ((t_diningtable *)philo->table)->die)
 	{
 		philo->stop_flg = PHILO_DIED;
 		philo->must_eat = 0;
@@ -37,15 +37,16 @@ void	monitor(void *arg)
 	t_diningtable	*table;
 	int				continue_flg;
 
-	table = (t_diningtable*)arg;
+	table = (t_diningtable *)arg;
 	i = 0;
 	upper_array = table->philo_num;
-	while(1)
+	while (1)
 	{
 		continue_flg = STOP;
 		while (i < upper_array)
 		{
-			if (table->philo[i]->timestamp != 0 && table->philo[i]->stop_flg != PHILO_DIED)
+			if (table->philo[i]->timestamp != 0 && \
+				table->philo[i]->stop_flg != PHILO_DIED)
 				do_monitoring(table->philo[i]);
 			if (table->philo[i]->stop_flg != PHILO_DIED)
 				continue_flg = CONTINUE;

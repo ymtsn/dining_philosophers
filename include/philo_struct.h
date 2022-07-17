@@ -1,14 +1,14 @@
 #ifndef PHILO_STRUCT_H
-#define PHILO_STRUCT_H
-#define SUCCESS 0
-#define FAIL 1
-#define ERR 1
+# define PHILO_STRUCT_H
+# define SUCCESS 0
+# define FAIL 1
+# define ERR 1
 typedef struct s_fork{
 	int				fork_id;
 	int				use;
 	int				use_philo_id;
 	pthread_mutex_t	mutex;
-} t_fork;
+}	t_fork;
 typedef struct s_philo{
 	pthread_t		thread_id;
 	int				philo_id;
@@ -20,7 +20,7 @@ typedef struct s_philo{
 	t_fork			*right_fork;
 	t_fork			*left_fork;
 	int				parmission;
-}t_philo;
+}	t_philo;
 typedef struct s_diningtable{
 	t_philo		**philo;
 	t_fork		**fork;
@@ -31,5 +31,5 @@ typedef struct s_diningtable{
 	int			must_eat;
 	pthread_t	waiter_tid;
 	pthread_t	monitor_tid;
-} t_diningtable;
+}	t_diningtable;
 #endif

@@ -13,7 +13,7 @@ static void	print_die_timestamp(t_philo *philo, char *MSG)
 	printf("%lu %d %s\n", get_timestamp(), philo->philo_id + 1, MSG);
 }
 
-static	void do_monitoring(t_philo *philo)
+static	void	do_monitoring(t_philo *philo)
 {
 	size_t	now;
 	int		diff;
@@ -34,8 +34,8 @@ void	monitor(void *arg)
 {
 	t_philo	*philo;
 
-	philo = (t_philo*)arg;
-	while(1)
+	philo = (t_philo *)arg;
+	while (1)
 	{
 		do_monitoring(philo);
 		if (philo->stop_flg == PHILO_DIED)

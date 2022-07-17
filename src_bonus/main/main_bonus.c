@@ -20,4 +20,3 @@ int	main(int argc,	char *argv[])
 	destroy_variables(table);
 	return (0);
 }
-
