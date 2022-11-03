@@ -1,0 +1,6 @@
+philosophers.code-workspace
+philo
+philo_bonus
+debug
+*.o
+.vscode/settings.json
